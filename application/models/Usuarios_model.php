@@ -18,13 +18,7 @@ class Usuarios_model extends CI_Model {
         $this->db->where('usuario', $usuario);
         $this->db->where('contrasena', $contrasena);
         $query = $this->db->get();
-        $datos = $query->row();
-        $respuesta = count($datos);
-        if($respuesta > 0){
-            $data = true;
-        }else{
-            $data = false;
-        }
+        $data = $query->result_array();
         return $data;
     }
     
