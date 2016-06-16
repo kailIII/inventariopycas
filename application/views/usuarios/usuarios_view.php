@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Menu Principal</title>
+    <title>Mantenimeinto Usuario</title>
     <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/datatables/css/dataTables.bootstrap.css')?>" rel="stylesheet">
 
@@ -50,9 +50,31 @@
         <div class="row">
             <div class="col-lg-12">
                 <div align="center" class="alert alert-info">
-                    <h1 class="text-info">PCyA CONTROL</h1>
+                    <h1 class="text-info">Administrar Información del Usuario</h1>
                 </div>
-                <center><img class="img-responsive" src="http://placehold.it/750x500" alt=""></center>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-4">
+                <div class="thumbnail" align="center">
+                    <h2>Crear Usuario</h2>
+                    <img src="<?=base_url()?>imagenes/salon.png" width="250" height="250"><br>
+                    <a href="<?= site_url('usuarios/registrar') ?>" class="btn btn-info btn-large"><strong>Ingresar</strong></a><br><br>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="thumbnail" align="center">
+                    <h2>Editar Usuario</h2>
+                    <img src="<?=base_url()?>imagenes/materia.png" width="250" height="250"><br>
+                    <a href="<?= site_url('usuarios/editar') ?>" class="btn btn-info btn-large"><strong>Ingresar</strong></a><br><br>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="thumbnail" align="center">
+                    <h2>Registrar Usuario</h2>
+                    <img src="<?=base_url()?>imagenes/empresa.png" width="250" height="250"><br>
+                    <a href="<?= site_url('usuarios/registrar') ?>" class="btn btn-info btn-large"><strong>Ingresar</strong></a><br><br>
+                </div>
             </div>
         </div>
     </div>

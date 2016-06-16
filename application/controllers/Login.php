@@ -30,4 +30,10 @@ class Login extends CI_Controller {
             }
         }
     }
+
+    public function cerrarsession(){
+        $this->session->unset_userdata('logged_in');
+        session_destroy();
+        redirect('/login/index');
+    }
 }
