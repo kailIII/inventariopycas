@@ -7,7 +7,7 @@
     <title>Login</title>
     </head> 
 <body>
-    <h1>Iniciando</h1>
+    <h1>Entrastes</h1>
 
 <script type="text/javascript">
 

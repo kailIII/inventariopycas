@@ -11,12 +11,22 @@ class Login extends CI_Controller {
 
     public function index()
     {
+        $username = $this->input->post('usuario');
+        $password = $this->input->post('password');
         $this->load->helper('url');
-        $this->load->view('login_view');
-    }
-    
-    public function login(){
-        $data = $this->usuarios->login('cnieve','123456');
-        echo '<pre>';print_r($data);exit();
+        $data = array();
+        if($username == '' && $password == ''){
+            $data['respuesta'] = '';
+            $this->load->view('login/login_view',$data);
+        }else{
+            $datos = $this->usuarios->login($username,$password);
+            if($datos){
+                $data['respuesta'] = 'Correctos';
+                $this->load->view('principal/principal_view',$data);
+            }else{
+                $data['respuesta'] = '<div class="alert alert-danger">Usuario o contraseña incorrectos.</div>';
+                $this->load->view('login/login_view',$data);
+            }
+        }
     }
 }
