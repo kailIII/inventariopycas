@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?= site_url('principal/index') ?>">Principal</a></li>
                 <li><a href="#">Inventario General</a></li>
-                <li><a href="#">Solicitud</a></li>
+                <li><a href="<?= site_url('solicitud/index') ?>">Solicitud</a></li>
                 <li><a href="<?= site_url('usuarios/index') ?>">Usuarios</a></li>
             </ul>
             <ul class="nav navbar-nav">
