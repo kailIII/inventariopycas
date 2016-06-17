@@ -22,10 +22,12 @@ class Usuarios_model extends CI_Model {
         return $data;
     }
 
-    public function obtenerUsuario($id){
+    public function obtenerUsuario($id, $todos = false){
         $this->db->select('*');
         $this->db->from('usuarios');
-        $this->db->where('codigo', $id);
+        if(!$todos){
+            $this->db->where('codigo', $id);
+        }
         $query = $this->db->get();
         $data = $query->result_array();
         return $data;

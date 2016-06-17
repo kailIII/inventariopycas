@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mantenimeinto Usuario</title>
+    <title>Reportes</title>
     <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/datatables/css/dataTables.bootstrap.css')?>" rel="stylesheet">
 
@@ -51,7 +51,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Bienvenido<span class="glyphicon glyphicon-user"></span></a>-->
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bienvenido <?php echo $username; ?><span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bienvenido <?php echo $username; ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?= site_url('usuarios/perfil') ?>"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
                             <li><a href="<?= site_url('login/cerrarsession') ?>"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesion</a></li>
@@ -64,33 +64,39 @@
     <br/><br/><br/><br/>
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div align="center" class="alert alert-info">
-                    <h1 class="text-info">Administrar Información del Usuario</h1>
-                </div>
+            <div class="col-lg-2">
             </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-lg-4">
-                <div class="thumbnail" align="center">
-                    <h2>Crear Usuario</h2>
-                    <img src="<?=base_url()?>imagenes/salon.png" width="250" height="250"><br>
-                    <a href="<?= site_url('usuarios/registrar') ?>" class="btn btn-info btn-large"><strong>Ingresar</strong></a><br><br>
-                </div>
+            <div class="col-lg-8">
+                <form class="form-horizontal" role="form" id="formreporte" name="formreporte" action="generarreportes" target="_blank">
+                    <input type="hidden" id="numreporte" name="numreporte" />
+                    <table class="table table-bordered table table-hover">
+                        <tr class="info">
+                            <td colspan="4"><center><strong class="text-info">Reportes</strong></center></td>
+                        </tr>
+                        <?php
+                        foreach ($reportes as $key => $valor):
+                        ?>
+                        <tr style="cursor: pointer;" id="<?php echo $key; ?>" class="seleccionar" onclick="seleccionar('<?php echo $key; ?>');">
+                            <td style="padding-left: 20px;"><strong><?php echo $key.'- '.$valor;?></strong></td>
+                        </tr>
+                        <?php
+                        endforeach;
+                        ?>
+                        <tr>
+                            <td colspan="4">
+                                <div class="row-fluid">
+                                    <div class="span4" align="center">
+                                        <button type="submit" class="btn btn-inverse">
+                                            <span class="glyphicon glyphicon-print"></span> Generar Reprote
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+			</tr>
+                    </table>   
+                </form>
             </div>
-            <div class="col-lg-4">
-                <div class="thumbnail" align="center">
-                    <h2>Editar Usuario</h2>
-                    <img src="<?=base_url()?>imagenes/materia.png" width="250" height="250"><br>
-                    <a href="<?= site_url('usuarios/editar') ?>" class="btn btn-info btn-large"><strong>Ingresar</strong></a><br><br>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="thumbnail" align="center">
-                    <h2>Registrar Usuario</h2>
-                    <img src="<?=base_url()?>imagenes/empresa.png" width="250" height="250"><br>
-                    <a href="<?= site_url('usuarios/registrar') ?>" class="btn btn-info btn-large"><strong>Ingresar</strong></a><br><br>
-                </div>
+            <div class="col-lg-2">
             </div>
         </div>
     </div>
@@ -99,6 +105,11 @@
 $(document).ready(function() {
     
 });
+function seleccionar(id){
+    $('.seleccionar').css('background-color','#FFFFFF');
+    $('#'+id).css('background-color','#3a87ad');
+    $('#numreporte').val(id);
+}
 </script>
 </body>
 </html>

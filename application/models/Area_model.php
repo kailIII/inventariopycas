@@ -75,7 +75,6 @@ class Area_model extends CI_Model {
     
     public function crud($data){
         try {
-            //echo '<pre>';print_r($data);exit();
             $datos = array('nombre' =>$data['nombres']);
             if($data['codigo'] == 'add'){
                 $this->db->insert($this->table , $datos);
@@ -87,5 +86,13 @@ class Area_model extends CI_Model {
         }catch (Exception $e) {
             return 'Excepción capturada: '.  $e->getMessage(). "\n";
         }
+    }
+
+    public function obtenerAreas(){
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
     }
 }
