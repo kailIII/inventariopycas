@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/inventariopycas/application/config/routes.php</file>
-            <file>file:/C:/xampp/htdocs/inventariopycas/application/models/Usuarios_model.php</file>
-            <file>file:/C:/xampp/htdocs/inventariopycas/application/views/login/login_view.php</file>
-            <file>file:/C:/xampp/htdocs/inventariopycas/application/controllers/Login.php</file>
+            <file>file:/C:/xampp/htdocs/inventariopycas/application/views/usuarios/editar_view.php</file>
+            <file>file:/C:/xampp/htdocs/inventariopycas/application/views/usuarios/usuarios_view.php</file>
             <file>file:/C:/xampp/htdocs/inventariopycas/application/views/principal/principal_view.php</file>
-            <file>file:/C:/xampp/htdocs/inventariopycas/application/controllers/Principal.php</file>
+            <file>file:/C:/xampp/htdocs/inventariopycas/application/views/usuarios/perfil_view.php</file>
+            <file>file:/C:/xampp/htdocs/inventariopycas/application/views/usuarios/registrar_view.php</file>
         </group>
     </open-files>
 </project-private>
