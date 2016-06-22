@@ -11,6 +11,7 @@ class Area extends CI_Controller {
     public function index(){
         $this->load->helper('url');
         $data = array();
+        $data['csslogin'] = false;
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
@@ -31,10 +32,10 @@ class Area extends CI_Controller {
 		foreach ($list as $person) {
                     $no++;
                     $row = array();
-                    $row[] = $person->codigo;
+                    $row[] = $person->codarea;
                     $row[] = $person->nombre;
-                    $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_area('."'".$person->codigo."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                              <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_area('."'".$person->codigo."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                    $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_area('."'".$person->codarea."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                              <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_area('."'".$person->codarea."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
                     $data[] = $row;
 		}
 		$output = array(

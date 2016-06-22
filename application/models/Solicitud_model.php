@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Area_model extends CI_Model {
-    var $table = 'area';
-    var $column_order = array('codarea','nombre');
-    var $column_search = array('codarea','nombre');
-    var $order = array('codarea' => 'desc');
+class Solicitud_model extends CI_Model {
+    var $table = 'solicitud';
+    var $column_order = array('codigo','fecha','hora','cargo','requerimiento');
+    var $column_search = array('codigo','fecha','hora','cargo','requerimiento');
+    var $order = array('codigo' => 'desc');
     
     public function __construct(){
         parent::__construct();
@@ -47,7 +47,7 @@ class Area_model extends CI_Model {
     
     public function get_by_id($id){
         $this->db->from($this->table);
-        $this->db->where('codarea',$id);
+        $this->db->where('codigo',$id);
         $query = $this->db->get();
         return $query->row();
     }
@@ -65,7 +65,7 @@ class Area_model extends CI_Model {
 
     public function delete_by_id($id){
         try {
-            $this->db->where('codarea', $id);
+            $this->db->where('codigo', $id);
             $this->db->delete($this->table);
             return 'Si';
         } catch (Exception $ex) {
@@ -75,11 +75,13 @@ class Area_model extends CI_Model {
     
     public function crud($data){
         try {
-            $datos = array('nombre' =>$data['nombres']);
+            $datos = array('fecha' =>$data['fecha'],'hora' =>$data['hora'],
+                'cargo' =>$data['cbocargo'],'requerimiento' =>$data['requerimiento'],
+                'nombres' =>$data['nomcomp'],'codarea' =>$data['cboarea']);
             if($data['codigo'] == 'add'){
                 $this->db->insert($this->table , $datos);
             }else{
-                $this->db->where('codarea', $data['codigo']);
+                $this->db->where('codigo', $data['codigo']);
                 $this->db->update($this->table , $datos);
             }
             return 'Si';

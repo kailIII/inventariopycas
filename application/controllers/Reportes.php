@@ -11,6 +11,7 @@ class Reportes extends CI_Controller {
     public function index(){
         $this->load->helper('url');
         $data = array();
+        $data['csslogin'] = false;
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
@@ -70,7 +71,7 @@ class Reportes extends CI_Controller {
                 $this->pdf->Cell(100,7,'NOMBRES','BRLT',0,'C','1');
                 $this->pdf->Ln(7);
                 foreach ($areas as $valor) {
-                    $this->pdf->Cell(15,5,$valor['codigo'],'BL',0,'C',0);
+                    $this->pdf->Cell(15,5,$valor['codarea'],'BL',0,'C',0);
                     $this->pdf->Cell(100,5,$valor['nombre'],'BRLT',0,'L',0);
                     $this->pdf->Ln(5);
                 }

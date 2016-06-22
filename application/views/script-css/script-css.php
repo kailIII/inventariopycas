@@ -5,6 +5,13 @@
 <link href="<?php echo base_url('assets/bootstrap-datetimepicker/css/github.min.css')?>" rel="stylesheet">
 <link href="<?php echo base_url('assets/bootstrap-datetimepicker/css/bootstrap-clockpicker.min.css')?>" rel="stylesheet">
 
+<?php
+if($csslogin){
+    ?>
+    <link href="<?php echo base_url('assets/css-propios/login.css')?>" rel="stylesheet">
+    <?php
+}
+?>
 <!--JavaScript-->
 <script src="<?php echo base_url('assets/jquery/jquery-2.1.4.min.js')?>"></script>
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>

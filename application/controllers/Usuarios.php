@@ -11,6 +11,7 @@ class Usuarios extends CI_Controller {
     public function index(){
         $this->load->helper('url');
         $data = array();
+        $data['csslogin'] = false;
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
@@ -23,6 +24,7 @@ class Usuarios extends CI_Controller {
     public function perfil(){
         $this->load->helper('url');
         $data = array();
+        $data['csslogin'] = false;
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
@@ -38,6 +40,7 @@ class Usuarios extends CI_Controller {
     public function editar(){
         $this->load->helper('url');
         $data = array();
+        $data['csslogin'] = false;
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
@@ -53,6 +56,7 @@ class Usuarios extends CI_Controller {
     public function registrar(){
         $this->load->helper('url');
         $data = array();
+        $data['csslogin'] = false;
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];

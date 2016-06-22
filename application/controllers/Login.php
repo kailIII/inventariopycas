@@ -13,6 +13,7 @@ class Login extends CI_Controller {
         $password = $this->input->post('password');
         $this->load->helper('url');
         $data = array();
+        $data['csslogin'] = true;
         if($username == '' && $password == ''){
             $data['respuesta'] = '';
             $this->load->view('login/login_view',$data);
