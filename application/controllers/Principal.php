@@ -15,6 +15,8 @@ class Principal extends CI_Controller {
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
             $this->load->view('principal/principal_view',$data);
         }else{
             redirect('/login/index');

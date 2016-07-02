@@ -39,7 +39,9 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+    //declarar variable var nombrevariable = '';
     var msj = '<?php echo $respuesta; ?>';
+    console.log(msj);
     $("#mensaje").html(msj);
 });
 </script>

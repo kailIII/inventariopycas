@@ -7,6 +7,7 @@ class Solicitud extends CI_Controller {
         parent::__construct();
         $this->load->model('area_model','area');
         $this->load->model('solicitud_model','solicitud');
+        $this->load->model('accesorios_model','accesorios');
     }
 
     public function index(){
@@ -16,7 +17,11 @@ class Solicitud extends CI_Controller {
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
             $data['area'] = $this->area->obtenerAreas();
+            $data['accesorios'] = $this->accesorios->obtenerAccesorios();
+            //echo '<pre>';print_r($data['accesorios']);exit;
             $this->load->view('solicitud/solicitud_view',$data);
         }else{
             redirect('/login/index');

@@ -46,9 +46,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4">Requerimiento: </label>
+                                        <label class="control-label col-md-4">Accesorios: </label>
                                         <div class="col-md-8">
-                                            <textarea id="requerimiento" name="requerimiento" class="form-control" rows="3" cols="3"></textarea>
+                                            <select class="form-control" id="accesorios" name="accesorios">
+                                                <option value="">Seleccione</option>
+                                                <?php
+                                                foreach ($accesorios as $valor):
+                                                ?>
+                                                <option value="<?php echo $valor['codaccesorio']; ?>"><?php echo $valor['nomacesorio']; ?></option>
+                                                <?php
+                                                endforeach;
+                                                ?>
+                                            </select>
+                                            <!--<textarea id="requerimiento" name="requerimiento" class="form-control" rows="3" cols="3"></textarea>-->
                                         </div>
                                     </div>
                                 </div>
@@ -85,9 +95,15 @@
                                     <div class="col-lg-2 text-center">
                                         <button type="button" class="btn btn-success" onclick="save_solicitud('add');">Grabar</button>
                                     </div>
+                                    <?php
+                                    if($permiso == '1'){
+                                    ?>
                                     <div class="col-lg-2 text-center">
                                         <button type="button" class="btn btn-warning" onclick="save_solicitud('update');">Modificar</button>
                                     </div>
+                                    <?php
+                                    }
+                                    ?>
                                     <div class="col-lg-2 text-center">
                                         <button type="button" class="btn btn-danger" onclick="cancelar();">Cancelar</button>
                                     </div>
@@ -159,30 +175,35 @@ $(document).ready(function() {
 
     $('.clockpicker').clockpicker();
 });
-
-$('#tablasolicitud tbody').on('click', 'tr', function () {
-    var data = table.row( this ).data();
-    url = "<?php echo site_url('solicitud/ajax/edit')?>";
-    $.ajax({
-        url : url,
-        type: "POST",
-        data: {codigo:data[0]},
-        dataType: "JSON",
-        beforeSend:cargando,
-        success: function(data){
-            $('#codigo').val(data.codigo);
-            $('#fecha').val(data.fecha);
-            $('#hora').val(data.hora);
-            $('#cboarea').val(data.codarea);
-            $('#nomcomp').val(data.nombres);
-            $('#cbocargo').val(data.cargo);
-            $('#requerimiento').val(data.requerimiento);
-            $("#mensaje").html('');
-        },
-        error: problemas
-    });
-    return false;
-} );
+<?php 
+if($permiso == '1'){
+?>
+    $('#tablasolicitud tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+        url = "<?php echo site_url('solicitud/ajax/edit')?>";
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: {codigo:data[0]},
+            dataType: "JSON",
+            beforeSend:cargando,
+            success: function(data){
+                $('#codigo').val(data.codigo);
+                $('#fecha').val(data.fecha);
+                $('#hora').val(data.hora);
+                $('#cboarea').val(data.codarea);
+                $('#nomcomp').val(data.nombres);
+                $('#cbocargo').val(data.cargo);
+                $('#requerimiento').val(data.requerimiento);
+                $("#mensaje").html('');
+            },
+            error: problemas
+        });
+        return false;
+    } );
+<?php
+}
+?>
 
 function save_solicitud(parametro){
     var codigo = $('#codigo').val();

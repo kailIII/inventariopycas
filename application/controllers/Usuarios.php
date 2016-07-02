@@ -15,6 +15,8 @@ class Usuarios extends CI_Controller {
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
             $this->load->view('usuarios/usuarios_view',$data);
         }else{
             redirect('/login/index');
@@ -31,6 +33,8 @@ class Usuarios extends CI_Controller {
             $data['id'] = $session_data['id'];
             $datos = $this->usuarios->obtenerUsuario($data['id']);
             $data['datosusu'] = $datos;
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
             $this->load->view('usuarios/perfil_view',$data);
         }else{
             redirect('/login/index');
@@ -47,6 +51,8 @@ class Usuarios extends CI_Controller {
             $data['id'] = $session_data['id'];
             $datos = $this->usuarios->obtenerUsuario($data['id']);
             $data['datosusu'] = $datos;
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
             $this->load->view('usuarios/editar_view',$data);
         }else{
             redirect('/login/index');
@@ -60,6 +66,8 @@ class Usuarios extends CI_Controller {
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
             $this->load->view('usuarios/registrar_view',$data);
         }else{
             redirect('/login/index');

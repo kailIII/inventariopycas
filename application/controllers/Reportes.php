@@ -15,6 +15,8 @@ class Reportes extends CI_Controller {
         if($this->session->userdata('logged_in')){
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
             $data['reportes'] = array('1'=>'Reporte de Usuarios','2'=>'Reporte de Areas');
             $this->load->view('reportes/index_view',$data);
         }else{
@@ -39,22 +41,25 @@ class Reportes extends CI_Controller {
                 $this->pdf->SetFont('Arial', 'B', 9);
                 $this->pdf->Cell(15,7,'CODIGO','TBL',0,'C','1');
                 $this->pdf->Cell(25,7,'NOMBRES','TB',0,'L','1');
-                $this->pdf->Cell(25,7,'APELLIDOS','TB',0,'L','1');
+                $this->pdf->Cell(30,7,'APELLIDOS','TB',0,'L','1');
                 $this->pdf->Cell(25,7,'SEXO','TB',0,'L','1');
                 $this->pdf->Cell(25,7,'ESTADO','TB',0,'C','1');
                 $this->pdf->Cell(25,7,'DIRECCION','TB',0,'L','1');
                 $this->pdf->Cell(25,7,'PERMISO','TBR',0,'C','1');
                 $this->pdf->Ln(7);
+                $this->pdf->SetFont('Arial','',8);
                 foreach ($usuarios as $valor) {
                     $this->pdf->Cell(15,5,$valor['codigo'],'BL',0,'C',0);
                     $this->pdf->Cell(25,5,$valor['nombres'],'B',0,'L',0);
-                    $this->pdf->Cell(25,5,$valor['apellidos'],'B',0,'L',0);
+                    $this->pdf->Cell(30,5,  utf8_decode($valor['apellidos']),'B',0,'L',0);
                     $this->pdf->Cell(25,5,$valor['sexo'],'B',0,'L',0);
                     $this->pdf->Cell(25,5,$valor['estado'],'B',0,'C',0);
                     $this->pdf->Cell(25,5,$valor['direccion'],'B',0,'L',0);
                     $this->pdf->Cell(25,5,$valor['permiso'],'BR',0,'C',0);
                     $this->pdf->Ln(5);
                 }
+                $this->pdf->Image('imagenes/firma.png',60,230,50,20,'PNG');
+                $this->pdf->Image('imagenes/empresa.png',10,230,50,20,'PNG');
                 break;
             case '2':
                 $id = '';
