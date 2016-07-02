@@ -118,7 +118,7 @@
                             <select class="form-control" id="cbotipousu" name="cbotipousu">
                                 <option value="">Seleccione</option>
                                 <option value="A">Adminsitrador</option>
-                                <option value="T">Trabajador</option>
+                                <option value="U">Usuario</option>
                             </select>
                         </div>
                     </div>

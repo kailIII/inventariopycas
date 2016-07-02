@@ -13,8 +13,16 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?= site_url('principal/index') ?>">Principal</a></li>
                 <li><a href="#">Inventario General</a></li>
-                <li><a href="<?= site_url('solicitud/index') ?>">Solicitud</a></li>
                 <li><a href="<?= site_url('usuarios/index') ?>">Usuarios</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Solicitud <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?= site_url('solicitud/index') ?>">Equipo</a></li>
+                        <li><a href="<?= site_url('soporte/index') ?>">Soporte</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
@@ -34,7 +42,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bienvenido <?php echo $username; ?> <span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>Bienvenido</b> <?php echo $username; ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?= site_url('usuarios/perfil') ?>"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
                         <li><a href="<?= site_url('login/cerrarsession') ?>"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesion</a></li>
