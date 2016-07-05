@@ -43,7 +43,7 @@ class Inventario extends CI_Controller {
                     $no++;
                     $row = array();
                     $row[] = $person->codinventario;
-                    $row[] = $person->equipo;
+                    $row[] = $person->usuario;
                     $row[] = $person->inventario;
                     $row[] = $person->usuario;
                     $row[] = $person->nombre;

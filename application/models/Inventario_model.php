@@ -22,8 +22,9 @@ class Inventario_model extends CI_Model {
 
     private function _get_datatables_query(){
 	$this->db->from($this->table);
+        $this->db->join('equipo','equipo.equipo = inventario.equipo');
+        $this->db->join('usuarios','usuarios.codigo = inventario.codigo');
         $this->db->join('area','area.codarea = inventario.codarea');
-        $this->db->join('usuarios','usuarios.usuario = inventario.usuario');
         $i = 0;
         foreach ($this->column_search as $item){
             if($_POST['search']['value']){
