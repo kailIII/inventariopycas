@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Datos del Solicitante</div>
+                    <div class="panel-heading">Solicitud de Sala</div>
                     <div id="mensaje"></div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" id="formsolicitud" name="formsolicitud">
@@ -125,15 +125,6 @@
                                     ?>
                                     <div class="col-lg-2 text-center">
                                         <button type="button" class="btn btn-success" onclick="save_solicitud('add');">Grabar</button>
-                                    </div>
-                                    <?php
-                                    }
-                                    ?>
-                                    <?php
-                                    if($permiso == '1'){
-                                    ?>
-                                    <div class="col-lg-2 text-center">
-                                        <button type="button" class="btn btn-warning" onclick="save_solicitud('update');">Modificar</button>
                                     </div>
                                     <?php
                                     }

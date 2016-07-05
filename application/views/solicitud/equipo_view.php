@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Solicitud</title>
+    <title>Solicitud Equipo</title>
     <?php require_once(APPPATH."views/script-css/script-css.php"); ?>
     </head>
 <body>
@@ -14,20 +14,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Datos del Solicitante</div>
+                    <div class="panel-heading">Solicitud de Equipo</div>
                     <div id="mensaje"></div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" id="formsolicitud" name="formsolicitud">
+                        <form class="form-horizontal" role="form" id="formequipo" name="formsolicitud">
                             <input type="hidden" id="codigo" name="codigo" />
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-4">Fecha: </label>
-                                        <div class="col-md-4">
-                                            <input placeholder="yyyy-mm-dd" class="form-control datepicker" id="fecha" name="fecha" type="text">
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4">Nombres y Apellidos: </label>
                                         <div class="col-md-6">
@@ -38,7 +31,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-4">Cargo: </label>
                                         <div class="input-group clockpicker col-md-4" style="padding-left: 15px;">
-                                            <select class="form-control" id="cbocargo" name="cbocargo">
+                                            <select class="form-control" id="cargo" name="cargo">
                                                 <option value="">Seleccione</option>
                                                 <option value="G">Gerente</option>
                                                 <option value="U">Usuario</option>
@@ -46,36 +39,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4">Accesorios: </label>
-                                        <div class="col-md-8">
-                                            <select class="form-control" id="accesorios" name="accesorios">
+                                        <label class="control-label col-md-4">Equipo: </label>
+                                        <div class="input-group clockpicker col-md-4" style="padding-left: 15px;">
+                                            <select class="form-control" id="equipo" name="equipo">
                                                 <option value="">Seleccione</option>
                                                 <?php
-                                                foreach ($accesorios as $valor):
+                                                foreach ($equipos as $valor):
                                                 ?>
-                                                <option value="<?php echo $valor['codaccesorio']; ?>"><?php echo $valor['nomacesorio']; ?></option>
+                                                    <option value="<?php echo $valor['equipo'];?>"><?php echo $valor['presentacion']?></option>
                                                 <?php
                                                 endforeach;
                                                 ?>
                                             </select>
-                                            <!--<textarea id="requerimiento" name="requerimiento" class="form-control" rows="3" cols="3"></textarea>-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Hora: </label>
-                                        <div class="input-group clockpicker col-md-4" style="padding-left: 15px;">
-                                            <input type="text" class="form-control" id="hora" name="hora" placeholder="hh-mm">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-time"></span>
-                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">Area: </label>
+                                        <label class="control-label col-md-4">Area: </label>
                                         <div class="col-md-6">
-                                            <select class="form-control" id="cboarea" name="cboarea">
+                                            <select class="form-control" id="codarea" name="codarea">
                                                 <option value="">Seleccione</option>
                                                 <?php
                                                 foreach ($area as $valor):
@@ -88,6 +69,31 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Hora: </label>
+                                        <div class="input-group clockpicker col-md-4" style="padding-left: 15px;">
+                                            <input type="text" class="form-control" id="hora" name="hora" placeholder="hh-mm">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Fecha Entrega: </label>
+                                        <div class="col-md-4">
+                                            <input placeholder="yyyy-mm-dd" class="form-control datepicker" id="fechaentrega" name="fechaentrega" type="text">
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Fecha Devolucion: </label>
+                                        <div class="col-md-4">
+                                            <input placeholder="yyyy-mm-dd" class="form-control datepicker" id="fechadevulucion" name="fechadevulucion" type="text">
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div><br/>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -95,15 +101,6 @@
                                     <div class="col-lg-2 text-center">
                                         <button type="button" class="btn btn-success" onclick="save_solicitud('add');">Grabar</button>
                                     </div>
-                                    <?php
-                                    if($permiso == '1'){
-                                    ?>
-                                    <div class="col-lg-2 text-center">
-                                        <button type="button" class="btn btn-warning" onclick="save_solicitud('update');">Modificar</button>
-                                    </div>
-                                    <?php
-                                    }
-                                    ?>
                                     <div class="col-lg-2 text-center">
                                         <button type="button" class="btn btn-danger" onclick="cancelar();">Cancelar</button>
                                     </div>
@@ -117,10 +114,13 @@
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
+                                    <th>Nombres y Apellidos</th>
+                                    <th>Equipo</th>
                                     <th>Cargo</th>
-                                    <th>Requerimineto</th>
+                                    <th>Cod. Area</th>
+                                    <th>Hora</th>
+                                    <th>Fecha Entrega</th>
+                                    <th>Fecha Devolucion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,7 +139,7 @@ $(document).ready(function() {
         "serverSide": true,
         "order": [], 
         "ajax": {
-            "url": "<?php echo site_url('solicitud/ajax/list')?>",
+            "url": "<?php echo site_url('solicitud/ajax/listequipo')?>",
             "type": "POST"
         },
         "columnDefs": [{ 
@@ -175,52 +175,27 @@ $(document).ready(function() {
 
     $('.clockpicker').clockpicker();
 });
-<?php 
-if($permiso == '1'){
-?>
-    $('#tablasolicitud tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-        url = "<?php echo site_url('solicitud/ajax/edit')?>";
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: {codigo:data[0]},
-            dataType: "JSON",
-            beforeSend:cargando,
-            success: function(data){
-                $('#codigo').val(data.codigo);
-                $('#fecha').val(data.fecha);
-                $('#hora').val(data.hora);
-                $('#cboarea').val(data.codarea);
-                $('#nomcomp').val(data.nombres);
-                $('#cbocargo').val(data.cargo);
-                $('#requerimiento').val(data.requerimiento);
-                $("#mensaje").html('');
-            },
-            error: problemas
-        });
-        return false;
-    } );
-<?php
-}
-?>
 
 function save_solicitud(parametro){
     var codigo = $('#codigo').val();
+    var equipo = $('#equipo').val();
+    var codarea = $('#codarea').val();
     if(parametro === 'add'){
-        url = "<?php echo site_url('solicitud/ajax/insert')?>";
+        url = "<?php echo site_url('solicitud/ajax/insertequipo')?>";
         $('#codigo').val('add');
-    }else{
-        url = "<?php echo site_url('solicitud/ajax/update')?>";
-        if(codigo === ''){
-            alert('Atención - Debe seleccionar una fila.');
-            return false;
-        }
+    }
+    if(equipo === ''){
+        alert('Atencion debe ingresar un equipo');
+        return false;
+    }
+    if(codarea === ''){
+        alert('Atencion debe ingresar una area.');
+        return false;
     }
     $.ajax({
         url : url,
         type: "POST",
-        data: $('#formsolicitud').serialize(),
+        data: $('#formequipo').serialize(),
         dataType: "JSON",
         beforeSend:cargando,
         success: function(data){
@@ -230,9 +205,11 @@ function save_solicitud(parametro){
                 $("#mensaje").html('<div class="alert alert-danger" colspan="3"><b>!Atención¡</b>Error: '+data.msj+'</div>');
             }
             reload_table();
+            cancelar();
         },
         error: problemas
     });
+    return false;
 }
 function cargando(){
     $("#mensaje").html('<img src="<?=base_url()?>imagenes/cargando2.gif">');
@@ -244,12 +221,12 @@ function problemas(){
 
 function cancelar(){
     $('#codigo').val('');
-    $('#fecha').val('');
-    $('#hora').val('');
-    $('#cboarea').val('');
     $('#nomcomp').val('');
-    $('#cbocargo').val('');
-    $('#requerimiento').val('');
+    $('#equipo').val('');
+    $('#codarea').val('');
+    $('#hora').val('');
+    $('#fechaentrega').val('');
+    $('#fechadevulucion').val('');
 }
 function reload_table(){
     table.ajax.reload(null,false);

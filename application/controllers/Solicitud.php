@@ -7,7 +7,9 @@ class Solicitud extends CI_Controller {
         parent::__construct();
         $this->load->model('area_model','area');
         $this->load->model('solicitudsala_model','solicitud');
+        $this->load->model('solicitudequipo_model','equipo');
         $this->load->model('accesorios_model','accesorios');
+        $this->load->model('equipo_model','equipos');
         $this->load->model('sala_model','sala');
     }
 
@@ -55,6 +57,32 @@ class Solicitud extends CI_Controller {
                 
 		echo json_encode($output);
                 break;
+            case 'listequipo':
+                $data = array();
+                $list = $this->equipo->get_datatables();
+		$no = $_POST['start'];
+		foreach ($list as $person) {
+                    $no++;
+                    $row = array();
+                    $row[] = $person->idequipo;
+                    $row[] = $person->nomcomp;
+                    $row[] = $person->presentacion;
+                    $row[] = (($person->cargo == 'G')?'Gerente':'Usuario');
+                    $row[] = $person->nombre;
+                    $row[] = $person->hora;
+                    $row[] = $person->fechaentrega;
+                    $row[] = $person->fechadevulucion;
+                    $data[] = $row;
+		}
+		$output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->equipo->count_all(),
+                        "recordsFiltered" => $this->equipo->count_filtered(),
+                        "data" => $data,
+                    );
+                
+		echo json_encode($output);
+                break;
             case 'delete':
                 $msj = $this->solicitud->delete_by_id($_POST['id']);
 		echo json_encode(array("msj" => $msj));
@@ -69,6 +97,11 @@ class Solicitud extends CI_Controller {
                 $msj = $this->solicitud->crud($_POST);
                 $msj1 = $this->solicitud->sala->updatesala($_POST);
 		echo json_encode(array("msj" => $msj));
+                break;
+            case 'insertequipo':
+            case 'updateequipo':
+                $msj = $this->equipo->crud($_POST);
+                echo json_encode(array("msj" => $msj));
                 break;
         endswitch;
     }
@@ -129,6 +162,7 @@ class Solicitud extends CI_Controller {
             $data['permiso'] = $session_data['permiso'];
             $data['area'] = $this->area->obtenerAreas();
             $data['accesorios'] = $this->accesorios->obtenerAccesorios();
+            $data['equipos'] = $this->equipos->obtenerEquipos();
             $this->load->view('solicitud/equipo_view',$data);
         }else{
             redirect('/login/index');
