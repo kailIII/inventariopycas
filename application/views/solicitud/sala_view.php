@@ -19,6 +19,9 @@
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" id="formsolicitud" name="formsolicitud">
                             <input type="hidden" id="codigo" name="codigo" />
+                            <?php
+                                if($salamsj === 'S'){
+                            ?>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -81,9 +84,6 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <?php
-                                    if($salamsj === 'S'){
-                                    ?>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Sala: </label>
                                         <div class="input-group col-md-4" style="padding-left: 15px;">
@@ -99,15 +99,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <?php
-                                    }else{
-                                    ?>
-                                    <div class="form-group">
-                                        <label class="control-label">No hay sala disponibles</label>
-                                    </div>
-                                    <?php
-                                    }
-                                    ?>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Area: </label>
                                         <div class="input-group col-md-4" style="padding-left: 15px;">
@@ -124,7 +115,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><br/>
+                            </div>
+                            <br/>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="col-lg-3"></div>
@@ -152,6 +144,15 @@
                                     <div class="col-lg-3"></div>
                                 </div>
                             </div>
+                            <?php
+                            }else{
+                            ?>
+                            <div class="form-group">
+                                <label class="control-label">&nbsp;No hay sala disponibles</label>
+                            </div>
+                            <?php
+                            }
+                            ?>
                         </form>
                     </div>
                     <div class="panel-footer">
@@ -271,6 +272,7 @@ function save_solicitud(parametro){
                 $("#mensaje").html('<div class="alert alert-danger" colspan="3"><b>!Atención¡</b>Error: '+data.msj+'</div>');
             }
             reload_table();
+            location.reload();
         },
         error: problemas
     });
