@@ -14,12 +14,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Datos del Solicitante</div>
+                    <div class="panel-heading">Inventario</div>
                     <div id="mensaje"></div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" id="formsolicitud" name="formsolicitud">
                             <input type="hidden" id="codigo" name="codigo" />
-                            <div class="row">
+<!--                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label col-md-4">Fecha: </label>
@@ -58,7 +58,7 @@
                                                 endforeach;
                                                 ?>
                                             </select>
-                                            <!--<textarea id="requerimiento" name="requerimiento" class="form-control" rows="3" cols="3"></textarea>-->
+                                            <textarea id="requerimiento" name="requerimiento" class="form-control" rows="3" cols="3"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -112,9 +112,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <br/>
-                            <div class="row">
+<!--                            <div class="row">
                                 <div class="col-lg-12">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-2 text-center">
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="col-lg-3"></div>
                                 </div>
-                            </div>
+                            </div>-->
                         </form>
                     </div>
                     <div class="panel-footer">
