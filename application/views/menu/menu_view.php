@@ -15,7 +15,7 @@ if($tipousu == 'A'){
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="<?= site_url('principal/index') ?>">Principal</a></li>
-                <li><a href="#">Inventario General</a></li>
+                <li><a href="<?= site_url('inventario/index') ?>">Inventario General</a></li>
                 <li><a href="<?= site_url('usuarios/index') ?>">Usuarios</a></li>
             </ul>
             <ul class="nav navbar-nav">
