@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Solicitud_model extends CI_Model {
-    var $table = 'solicitud';
-    var $column_order = array('codigo','fecha','hora','cargo','requerimiento');
-    var $column_search = array('codigo','fecha','hora','cargo','requerimiento');
-    var $order = array('codigo' => 'desc');
+class Sala_model extends CI_Model {
+    var $table = 'sala';
+    var $column_order = array('codsala', 'ocupado','horaini','horafin');
+    var $column_search = array('codsala', 'ocupado','horaini','horafin');
+    var $order = array('codsala' => 'asc');
     
     public function __construct(){
         parent::__construct();
@@ -47,9 +47,17 @@ class Solicitud_model extends CI_Model {
     
     public function get_by_id($id){
         $this->db->from($this->table);
-        $this->db->where('codigo',$id);
+        $this->db->where('codsala',$id);
         $query = $this->db->get();
         return $query->row();
+    }
+    
+    public function obtenersalaocupado(){
+        $this->db->from($this->table);
+        $this->db->where('ocupado','N');
+        $query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
     }
 
     function count_filtered(){
@@ -65,7 +73,7 @@ class Solicitud_model extends CI_Model {
 
     public function delete_by_id($id){
         try {
-            $this->db->where('codigo', $id);
+            $this->db->where('codsala', $id);
             $this->db->delete($this->table);
             return 'Si';
         } catch (Exception $ex) {
@@ -73,24 +81,34 @@ class Solicitud_model extends CI_Model {
         }
     }
     
-    public function crud($data){
+//    public function crud($data){
+//        try {
+//            $datos = array('nombre' =>$data['nombres']);
+//            if($data['codigo'] == 'add'){
+//                $this->db->insert($this->table , $datos);
+//            }else{
+//                $this->db->where('codarea', $data['codigo']);
+//                $this->db->update($this->table , $datos);
+//            }
+//            return 'Si';
+//        }catch (Exception $e) {
+//            return 'Excepción capturada: '.  $e->getMessage(). "\n";
+//        }
+//    }
+
+    public function updatesala($datos){
         try {
-            $datos = array('fecha' =>$data['fecha'],'hora' =>$data['hora'],
-                'cargo' =>$data['cbocargo'],'requerimiento' =>$data['requerimiento'],
-                'nombres' =>$data['nomcomp'],'codarea' =>$data['cboarea']);
-            if($data['codigo'] == 'add'){
-                $this->db->insert($this->table , $datos);
-            }else{
-                $this->db->where('codigo', $data['codigo']);
-                $this->db->update($this->table , $datos);
-            }
+            //echo '<pre>';print_r($datos);exit;
+            //var_dump($datos['cbosala'],$datos['horaini'],$datos['horafin']);exit;
+            $data = array('codsala'=>$datos['cbosala'],'horaini'=>$datos['horaini'],'horafin'=>$datos['horafin'],'ocupado'=>'S');
+            $this->db->where('codsala', $datos['cbosala']);
+            $this->db->update($this->table , $data);
             return 'Si';
         }catch (Exception $e) {
             return 'Excepción capturada: '.  $e->getMessage(). "\n";
         }
     }
-
-    public function obtenerAreas(){
+    public function obtenerSalas(){
         $this->db->select('*');
         $this->db->from($this->table);
         $query = $this->db->get();

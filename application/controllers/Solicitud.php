@@ -6,8 +6,9 @@ class Solicitud extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('area_model','area');
-        $this->load->model('solicitud_model','solicitud');
+        $this->load->model('solicitudsala_model','solicitud');
         $this->load->model('accesorios_model','accesorios');
+        $this->load->model('sala_model','sala');
     }
 
     public function index(){
@@ -32,18 +33,17 @@ class Solicitud extends CI_Controller {
         $this->url_elements = explode('/', $_SERVER['PATH_INFO']);
         $case = $this->url_elements[3];
         switch ($case):
-            case 'list':
+            case 'listsala':
 		$data = array();
-                $list = $this->solicitud->get_datatables();
+                $list = $this->sala->get_datatables();
 		$no = $_POST['start'];
 		foreach ($list as $person) {
                     $no++;
                     $row = array();
-                    $row[] = $person->codigo;
-                    $row[] = $person->fecha;
-                    $row[] = $person->hora;
-                    $row[] = (($person->cargo == 'U')?'Usuario':'Generente');
-                    $row[] = $person->requerimiento;
+                    $row[] = $person->codsala;
+                    $row[] = (($person->ocupado=='S'?'Si':'No'));
+                    $row[] = $person->horaini;
+                    $row[] = $person->horafin;
                     $data[] = $row;
 		}
 		$output = array(
@@ -65,9 +65,73 @@ class Solicitud extends CI_Controller {
                 break;
             case 'insert':
             case 'update':
+                //echo '<pre>';print_r($_POST);exit;
                 $msj = $this->solicitud->crud($_POST);
+                $msj1 = $this->solicitud->sala->updatesala($_POST);
 		echo json_encode(array("msj" => $msj));
                 break;
         endswitch;
+    }
+    
+    public function sala(){
+        $this->load->helper('url');
+        $data = array();
+        $data['csslogin'] = false;
+        if($this->session->userdata('logged_in')){
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
+            $data['area'] = $this->area->obtenerAreas();
+            //echo '<pre>';print_r($data['area']);exit;obtenersalaocupado
+            $data['accesorios'] = $this->accesorios->obtenerAccesorios();
+            $data['sala'] = $this->sala->obtenerSalas();
+            $data['obtenersalaocupado'] = $this->sala->obtenersalaocupado();
+            $salactn = count($data['obtenersalaocupado']);
+            if($salactn>0){
+                $data['salamsj'] = 'S';
+            }else{
+                $data['salamsj'] = 'N';
+                $data['obtenersalaocupado'] = array();
+            }
+            $this->load->view('solicitud/sala_view',$data);
+        }else{
+            redirect('/login/index');
+        }
+    }
+    
+    public function soporte(){
+        $this->load->helper('url');
+        $data = array();
+        $data['csslogin'] = false;
+        if($this->session->userdata('logged_in')){
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
+            $data['area'] = $this->area->obtenerAreas();
+            $data['accesorios'] = $this->accesorios->obtenerAccesorios();
+            //echo '<pre>';print_r($data['accesorios']);exit;
+            $this->load->view('solicitud/soporte_view',$data);
+        }else{
+            redirect('/login/index');
+        }
+    }
+    
+    public function equipo(){
+        $this->load->helper('url');
+        $data = array();
+        $data['csslogin'] = false;
+        if($this->session->userdata('logged_in')){
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['tipousu'] = $session_data['tipousu'];
+            $data['permiso'] = $session_data['permiso'];
+            $data['area'] = $this->area->obtenerAreas();
+            $data['accesorios'] = $this->accesorios->obtenerAccesorios();
+            $this->load->view('solicitud/equipo_view',$data);
+        }else{
+            redirect('/login/index');
+        }
     }
 }

@@ -22,8 +22,9 @@ if($tipousu == 'A'){
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Solicitud <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= site_url('solicitud/index') ?>">Equipo</a></li>
-                        <li><a href="<?= site_url('soporte/index') ?>">Soporte</a></li>
+                        <li><a href="<?= site_url('solicitud/sala') ?>">Sala</a></li>
+                        <li><a href="<?= site_url('solicitud/equipo') ?>">Equipo</a></li>
+                        <li><a href="<?= site_url('solicitud/soporte') ?>">Soporte</a></li>
                     </ul>
                 </li>
             </ul>
