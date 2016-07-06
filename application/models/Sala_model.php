@@ -81,20 +81,20 @@ class Sala_model extends CI_Model {
         }
     }
     
-//    public function crud($data){
-//        try {
-//            $datos = array('nombre' =>$data['nombres']);
-//            if($data['codigo'] == 'add'){
-//                $this->db->insert($this->table , $datos);
-//            }else{
-//                $this->db->where('codarea', $data['codigo']);
-//                $this->db->update($this->table , $datos);
-//            }
-//            return 'Si';
-//        }catch (Exception $e) {
-//            return 'Excepción capturada: '.  $e->getMessage(). "\n";
-//        }
-//    }
+    public function crud($data){
+        try {
+            $datos = array('ocupado' =>$data['ocupado'],'horaini' =>$data['horaini'],'horafin' =>$data['horafin'],'nomsala' =>$data['nomsala']);
+            if($data['codigo'] == 'add'){
+                $this->db->insert($this->table , $datos);
+            }else{
+                $this->db->where('codsala', $data['codigo']);
+                $this->db->update($this->table , $datos);
+            }
+            return 'Si';
+        }catch (Exception $e) {
+            return 'Excepción capturada: '.  $e->getMessage(). "\n";
+        }
+    }
 
     public function updatesala($datos){
         try {

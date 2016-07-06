@@ -2,11 +2,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Area extends CI_Controller {
+class Sala extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('area_model','area');
+        $this->load->model('sala_model','sala');
     }
 
     public function index(){
@@ -18,7 +18,7 @@ class Area extends CI_Controller {
             $data['username'] = $session_data['username'];
             $data['tipousu'] = $session_data['tipousu'];
             $data['permiso'] = $session_data['permiso'];
-            $this->load->view('area/index_view',$data);
+            $this->load->view('sala/index_view',$data);
         }else{
             redirect('/login/index');
         }
@@ -30,38 +30,42 @@ class Area extends CI_Controller {
         switch ($case):
             case 'list':
 		$data = array();
-                $list = $this->area->get_datatables();
+                $list = $this->sala->get_datatables();
 		$no = $_POST['start'];
 		foreach ($list as $person) {
                     $no++;
                     $row = array();
-                    $row[] = "<p class='text-center'>".$person->codarea."</p>";
-                    $row[] = $person->nombre;
-                    $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_area('."'".$person->codarea."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                              <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_area('."'".$person->codarea."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                    $row[] = "<p class='text-center'>".$person->codsala."</p>";
+                    $row[] = (($person->ocupado=='S')?'Si':'No');
+                    $row[] = $person->horaini;
+                    $row[] = $person->horafin;
+                    $row[] = $person->nomsala;
+                    $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_area('."'".$person->codsala."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                              <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_area('."'".$person->codsala."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>
                              <a class="btn btn-sm btn-success" href="javascript:void(0)" title="Hapus" onclick="add_area()"><i class="glyphicon glyphicon-plus"></i> Agregar</a>';
                     $data[] = $row;
 		}
                 //echo '<pre>';print_r($_POST['draw']);exit;
 		$output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->area->count_all(),
-                        "recordsFiltered" => $this->area->count_filtered(),
+                        "recordsTotal" => $this->sala->count_all(),
+                        "recordsFiltered" => $this->sala->count_filtered(),
                         "data" => $data,
                     );
 		echo json_encode($output);
                 break;
             case 'delete':
-                $msj = $this->area->delete_by_id($_POST['id']);
+                $msj = $this->sala->delete_by_id($_POST['id']);
 		echo json_encode(array("msj" => $msj));
                 break;
             case 'edit':
-                $data = $this->area->get_by_id($_POST['id']);
+                $data = $this->sala->get_by_id($_POST['id']);
+                //echo '<pre>';print_r($data);exit;
 		echo json_encode($data);
                 break;
             case 'insert':
             case 'update':
-                $msj = $this->area->crud($_POST);
+                $msj = $this->sala->crud($_POST);
 		echo json_encode(array("msj" => $msj));
                 break;
         endswitch;

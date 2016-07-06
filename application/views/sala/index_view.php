@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div align="center" class="alert alert-info">
-                    <h1 class="text-info">Mantenimiento Area</h1>
+                    <h1 class="text-info">Mantenimiento Sala</h1>
                 </div>
             </div>
         </div>
@@ -31,7 +31,10 @@
                     <thead>
                         <tr>
                             <th class="text-center">Codigo</th>
-                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Ocupado</th>
+                            <th class="text-center">Hora Inicio</th>
+                            <th class="text-center">Hora Fin</th>
+                            <th class="text-center">Nombre Sala</th>
                             <th style="width:205px;" class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -54,7 +57,7 @@ $(document).ready(function() {
         "serverSide": true,
         "order": [], 
         "ajax": {
-            "url": "<?php echo site_url('area/ajax/list')?>",
+            "url": "<?php echo site_url('sala/ajax/list')?>",
             "type": "POST"
         },
         "columnDefs": [{ 
@@ -78,6 +81,7 @@ $(document).ready(function() {
             }
         }
     });
+    $('.clockpicker').clockpicker();
 });
 
 function add_area(){
@@ -92,7 +96,7 @@ function add_area(){
 function delete_area(id){
     if(confirm('¿Esta seguro que desea eliminar sera un proceso irreversible.?')){
         $.ajax({
-            url : "<?php echo site_url('area/ajax/delete')?>",
+            url : "<?php echo site_url('sala/ajax/delete')?>",
             type: "POST",
             dataType: "JSON",
             data: {id:id},
@@ -107,7 +111,7 @@ function delete_area(id){
             },
             error: problemas
         });
-
+        return false;
     }
 }
 function cargando(){
@@ -128,28 +132,39 @@ function edit_area(id){
     $('.form-group').removeClass('has-error');
     $('.help-block').empty();
     $.ajax({
-        url : "<?php echo site_url('area/ajax/edit')?>",
+        url : "<?php echo site_url('sala/ajax/edit')?>",
         type: "POST",
         dataType: "JSON",
         data: {id:id},
         beforeSend:cargando,
         success: function(data){
-            $('[name="codigo"]').val(data.codigo);
-            $('[name="nombres"]').val(data.nombre);
+            console.log(data);
+            $('[name="codigo"]').val(data.codsala);
+            $('[name="ocupado"]').val(data.ocupado);
+            $('[name="horaini"]').val(data.horaini);
+            $('[name="horafin"]').val(data.horafin);
+            $('[name="nomsala"]').val(data.nomsala);
             $('#modal_form').modal('show');
             $('.modal-title').text('Editar Area');
             $('#mensaje').html('');
         },
         error: problemas
     });
+    return false;
 }
 
 function save_area(){
     var codigo = $('#codigo').val();
+    var ocupado = $('#ocupado').val();
+    if(ocupado === ''){
+        alert('Atencion debe ingresar ocupado.');
+        return false;
+    }
     if(codigo === 'add'){
-        url = "<?php echo site_url('area/ajax/insert')?>";
+        url = "<?php echo site_url('sala/ajax/insert')?>";
     }else{
-        url = "<?php echo site_url('area/ajax/update')?>";
+        
+        url = "<?php echo site_url('sala/ajax/update')?>";
     }
     $.ajax({
         url : url,
@@ -177,13 +192,42 @@ function save_area(){
                 <h3 class="modal-title">Person Form</h3>
             </div>
             <div class="modal-body form">
-                <form action="#" id="form" class="form-horizontal">
+                <form action="#" id="form" name="form" class="form-horizontal">
                     <input type="hidden" value="" name="codigo" id="codigo"/> 
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">First Name</label>
-                            <div class="col-md-9">
-                                <input name="nombres" id="nombres" placeholder="Nombres" class="form-control" type="text">
+                            <label class="control-label col-md-3">Ocupado</label>
+                            <div class="col-md-4">
+                                <select id="ocupado" name="ocupado" class="form-control col-md-5">
+                                    <option value="">Seleccione</option>
+                                    <option value="S">Si</option>
+                                    <option value="N">No</option>
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Hora Inicio: </label>
+                            <div class="input-group clockpicker col-md-4" style="padding-left: 15px;">
+                                <input type="text" class="form-control" id="horaini" name="horaini" placeholder="hh-mm">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Hora Fin: </label>
+                            <div class="input-group clockpicker col-md-4" style="padding-left: 15px;">
+                                <input type="text" class="form-control" id="horafin" name="horafin" placeholder="hh-mm">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nombre Sala: </label>
+                            <div class="col-md-4">
+                                <input  class="form-control" id="nomsala" name="nomsala" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>

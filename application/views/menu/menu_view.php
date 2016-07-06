@@ -33,6 +33,7 @@ if($tipousu == 'A'){
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mantenimiento <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?= site_url('area/index') ?>">Area</a></li>
+                        <li><a href="<?= site_url('sala/index') ?>">Sala</a></li>
                     </ul>
                 </li>
             </ul>
