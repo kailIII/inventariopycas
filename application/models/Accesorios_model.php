@@ -73,20 +73,21 @@ class Accesorios_model extends CI_Model {
         }
     }
     
-//    public function crud($data){
-//        try {
-//            $datos = array('nombre' =>$data['nombres']);
-//            if($data['codigo'] == 'add'){
-//                $this->db->insert($this->table , $datos);
-//            }else{
-//                $this->db->where('codarea', $data['codigo']);
-//                $this->db->update($this->table , $datos);
-//            }
-//            return 'Si';
-//        }catch (Exception $e) {
-//            return 'Excepción capturada: '.  $e->getMessage(). "\n";
-//        }
-//    }
+    public function crud($data){
+        try {
+            //echo '<pre>';print_r($data);exit;
+            $datos = array('nomacesorio' =>$data['nomacesorio']);
+            if($data['codigo'] == 'add'){
+                $this->db->insert($this->table , $datos);
+            }else{
+                $this->db->where('codaccesorio', $data['codigo']);
+                $this->db->update($this->table , $datos);
+            }
+            return 'Si';
+        }catch (Exception $e) {
+            return 'Excepción capturada: '.  $e->getMessage(). "\n";
+        }
+    }
 
     public function obtenerAccesorios(){
         $this->db->select('*');
