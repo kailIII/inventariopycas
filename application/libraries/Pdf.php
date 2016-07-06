@@ -16,6 +16,12 @@
                 case '2':
                     $this->Cell(120,10,'Reporte de Areas',0,0,'C');
                     break;
+                case '3':
+                    $this->Cell(120,10,'Reporte de Salas',0,0,'C');
+                    break;
+                case '4':
+                    $this->Cell(120,10,'Reporte de Equipos',0,0,'C');
+                    break;
             endswitch;
             $this->Ln('5');
             $this->SetFont('Arial','B',8);
