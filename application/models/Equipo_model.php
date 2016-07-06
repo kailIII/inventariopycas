@@ -73,20 +73,23 @@ class Equipo_model extends CI_Model {
         }
     }
     
-//    public function crud($data){
-//        try {
-//            $datos = array('nombre' =>$data['nombres']);
-//            if($data['codigo'] == 'add'){
-//                $this->db->insert($this->table , $datos);
-//            }else{
-//                $this->db->where('codarea', $data['codigo']);
-//                $this->db->update($this->table , $datos);
-//            }
-//            return 'Si';
-//        }catch (Exception $e) {
-//            return 'Excepción capturada: '.  $e->getMessage(). "\n";
-//        }
-//    }
+    public function crud($data){
+        try {
+            //echo '<pre<';print_r($data);exit;
+            $datos = array('presentacion' =>$data['presentacion'],'marca' =>$data['marca'],'modelo' =>$data['modelo'],'serial' =>$data['serial'],
+                'accesorio' =>$data['accesorio'],'nomequipo' =>$data['nomequipo'],'serialcargador' =>$data['serialcargador'],
+                'serialbateria' =>$data['serialbateria'],'fechafabrica' =>$data['fechafabrica']);
+            if($data['codigo'] == 'add'){
+                $this->db->insert($this->table , $datos);
+            }else{
+                $this->db->where('equipo', $data['codigo']);
+                $this->db->update($this->table , $datos);
+            }
+            return 'Si';
+        }catch (Exception $e) {
+            return 'Excepción capturada: '.  $e->getMessage(). "\n";
+        }
+    }
 
     public function updatesala($datos){
         try {

@@ -35,6 +35,7 @@ if($tipousu == 'A'){
                         <li><a href="<?= site_url('area/index') ?>">Area</a></li>
                         <li><a href="<?= site_url('sala/index') ?>">Sala</a></li>
                         <li><a href="<?= site_url('accesorios/index') ?>">Accesorios</a></li>
+                        <li><a href="<?= site_url('equipo/index') ?>">Equipo</a></li>
                     </ul>
                 </li>
             </ul>
