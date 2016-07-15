@@ -10,6 +10,7 @@ class Inventario extends CI_Controller {
         $this->load->model('accesorios_model','accesorios');
         $this->load->model('sala_model','sala');
         $this->load->model('inventario_model','inventario');
+        $this->load->model('equipo_model','equipo');
     }
 
     public function index(){
@@ -36,25 +37,25 @@ class Inventario extends CI_Controller {
         switch ($case):
             case 'listinventario':
 		$data = array();
-                $list = $this->inventario->get_datatables();
+                $list = $this->equipo->get_datatables();
                 //echo '<pre>';print_r($list);exit;
 		$no = $_POST['start'];
 		foreach ($list as $person) {
                     $no++;
                     $row = array();
-                    $row[] = $person->codinventario;
-                    $row[] = $person->usuario;
-                    $row[] = $person->inventario;
-                    $row[] = $person->usuario;
-                    $row[] = $person->nombre;
-                    $row[] = $this->estado($person->estadoinv);
-                    $row[] = $person->observaciones;
+                    $row[] = $person->equipo;
+                    $row[] = $person->presentacion;
+                    $row[] = $person->marca;
+                    $row[] = $person->modelo;
+                    $row[] = $person->serial;
+                    $row[] = $person->serialbateria;
+                    $row[] = $person->nomequipo;
                     $data[] = $row;
 		}
 		$output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->solicitud->count_all(),
-                        "recordsFiltered" => $this->solicitud->count_filtered(),
+                        "recordsTotal" => $this->equipo->count_all(),
+                        "recordsFiltered" => $this->equipo->count_filtered(),
                         "data" => $data,
                     );
                 

@@ -141,13 +141,13 @@
                         <table id="tablainventario" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Codigo</th>
                                     <th>Equipo</th>
-                                    <th>Inventario</th>
-                                    <th>Usuario</th>
-                                    <th>Area</th>
-                                    <th>Estado</th>
-                                    <th>Observaciones</th>
+                                    <th>Presentacion</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Serial</th>
+                                    <th>Serial Bateria</th>
+                                    <th>Nom. Equipo</th>
                                 </tr>
                             </thead>
                             <tbody>
